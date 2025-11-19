@@ -1,0 +1,25 @@
+name: swiftgo
+description: Demo ride-hailing app SwiftGo
+publish_to: "none"
+
+environment:
+  sdk: ">=3.19.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_maps_flutter: any
+  provider: any
+  smooth_page_indicator: any
+  lottie: any
+  flutter_polyline_points: any
+  shared_preferences: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
