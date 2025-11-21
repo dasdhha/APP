@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>VIRUS IK 2025</title>
+  <style>
+    body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#000;color:#ff0066;font-family:'Arial Black',sans-serif;}
+    #screen{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;background:radial-gradient(circle,#000,#220011);}
+    h1{font-size:60px;animation:glitch 0.5s infinite;text-shadow:0 0 20px #f00;}
+    #countdown{font-size:120px;color:#f00;text-shadow:0 0 30px #f00;animation:pulse 0.8s infinite;}
+    #btn{padding:25px 50px;font-size:35px;background:#f00;color:#fff;border:none;border-radius:20px;cursor:pointer;
+        animation:shakeBtn 0.3s infinite;box-shadow:0 0 40px #f00;}
+    .rain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+    .drop{position:absolute;width:4px;height:40px;background:#f00;opacity:0.8;animation:fall linear infinite;}
+    .shake{animation:shakeScreen 0.2s infinite;}
+    @keyframes glitch{0%,100%{text-shadow:5px 0 #0f0,-5px 0 #f00}50%{text-shadow:-5px 0 #0f0,5px 0 #f00}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @keyframes shakeBtn{0%,100%{transform:translate(0)}25%{transform:translate(-10px,0)}75%{transform:translate(10px,0)}}
+    @keyframes shakeScreen{0%,100%{transform:translate(0)}10%,30%,50%,70%,90%{transform:translate(-10px,0)}20%,40%,60%,80%{transform:translate(10px,0)}}
+    @keyframes fall{0%{transform:translateY(-100vh)}100%{transform:translateY(100vh)}}
+  </style>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+<div id="screen">
+  <h1>⚠️ VIRUS ĐÃ XÂM NHẬP ⚠️</h1>
+  <p style="font-size:32px;color:#0f0;animation:blink 0.5s infinite;">Toàn bộ dữ liệu đang bị mã hóa...</p>
+  <div id="countdown">15</div>
+  <button id="btn">BẤM ĐÂY ĐỂ DỪNG LẠI</button>
+  <p style="margin-top:30px;font-size:28px;color:#ff0;">Chỉ còn 1 cách cứu máy...</p>
+</div>
+
+<div class="rain" id="rain"></div>
+
+<audio id="alarm" loop autoplay volume="0.9">
+  <source src="https://cdn.glitch.global/0e8d5f5e-5e5e-4e5f-9e5f-5e5e5e5e5e5e/alarm-intense.mp3" type="audio/mp3">
+</audio>
+<audio id="troll" loop volume="1">
+  <source src="https://cdn.glitch.global/0e8d5f5e-5e5e-4e5f-9e5f-5e5e5e5e5e5e/rickroll-never-gonna.mp3" type="audio/mp3">
+</audio>
+
+<script>
+  let time = 15;
+  const countdown = document.getElementById('countdown');
+  const screen = document.getElementById('screen');
+  const btn = document.getElementById('btn');
+  const alarm = document.getElementById('alarm');
+  const troll = document.getElementById('troll');
+  const rain = document.getElementById('rain');
+
+  // Mưa máu
+  for(let i=0;i<200;i++){
+    let drop = document.createElement('div');
+    drop.classList.add('drop');
+    drop.style.left = Math.random()*100 + 'vw';
+    drop.style.animationDuration = 0.5 + Math.random()*0.5 + 's';
+    drop.style.animationDelay = Math.random()*2 + 's';
+    rain.appendChild(drop);
+  }
+
+  const timer = setInterval(()=>{
+    time--;
+    countdown.textContent = time;
+    if(time <= 5) countdown.style.color = '#fff';
+    if(time <= 0){
+      clearInterval(timer);
+      brickedMode();
+    }
+  },1000);
+
+  btn.onclick = () => {
+    clearInterval(timer);
+    alarm.pause();
+    troll.play();
+    screen.innerHTML = `
+      <h1 style="color:#0f0;font-size:80px;">MÁY ĐÃ ĐƯỢC CỨU!</h1>
+      <p style="font-size:50px;">Nhưng mày vừa gửi virus cho 10 đứa bạn rồi nha =))))</p>
+      <img src="https://i.imgur.com/8Z4t2ts.jpeg" width="400" style="border-radius:50%;box-shadow:0 0 50px #0f0;">
+      <p style="font-size:40px;color:#ff0;margin-top:30px;">ĐÙA TÍ THUI MÀ HẾT SỨC ĐỜI =))</p>
+    `;
+    document.body.classList.add('shake');
+    setTimeout(()=>{location.reload()},15000);
+  };
+
+  function brickedMode(){
+    document.body.classList.add('shake');
+    alarm.pause();
+    troll.play();
+    screen.innerHTML = `
+      <h1 style="font-size:100px;color:#f00;animation:glitch 0.3s infinite;">MÁY ĐÃ BRICK VĨNH VIỄN</h1>
+      <p style="font-size:60px;">TẤT CẢ DỮ LIỆU ĐÃ BỊ XÓA</p>
+      <img src="https://i.imgur.com/8Z4t2ts.jpeg" width="500">
+      <p style="font-size:50px;color:#0f0;margin-top:50px;">TẠO TROLL THÔI MÀ =))))))))</p>
+    `;
+  }
+
+  // Không cho thoát dễ
+  window.addEventListener("beforeunload", e => {
+    e.preventDefault();
+    e.returnValue = "Máy sắp brick thật đấy, chắc chắn thoát?";
+  });
+
+  // Fullscreen ép buộc
+  document.documentElement.requestFullscreen?.() || 
+  document.documentElement.webkitRequestFullscreen?.() ||
+  document.documentElement.msRequestFullscreen?.();
+
+  setInterval(()=>{document.body.style.transform = `rotate(${Math.random()*4-2}deg)`},100);
+</script>
+</body>
+</html>
